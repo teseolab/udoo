@@ -2,7 +2,7 @@ int SensorReadingcm;
 #define UltrasonicTriggerPin 5
 #define UltrasonicEchoPin 2
 #define ledGreenPin 9
-#define ledRedPin 9
+#define ledRedPin 13
 #define limit 20
 
 void setup() {
