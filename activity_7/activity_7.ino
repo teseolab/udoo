@@ -1,7 +1,8 @@
 int SensorReadingcm;
 #define UltrasonicTriggerPin 5
 #define UltrasonicEchoPin 2
-#define ledPin 9
+#define ledGreenPin 9
+#define ledRedPin 9
 #define limit 20
 
 void setup() {
@@ -12,7 +13,8 @@ void setup() {
   pinMode(UltrasonicTriggerPin, OUTPUT);
   pinMode(UltrasonicEchoPin, INPUT);
 
-  pinMode(ledPin, OUTPUT);
+  pinMode(ledGreenPin, OUTPUT);
+  pinMode(ledRedPin, OUTPUT);
   
 }
 
@@ -32,9 +34,11 @@ void loop() {
   SensorReadingcm = microsecondsToCentimeters(duration);
 
   if (SensorReadingcm < limit ) {
-    digitalWrite(ledPin, HIGH);
+    digitalWrite(ledRedPin, HIGH);
+    digitalWrite(ledGreenPin, LOW);
   } else {
-    digitalWrite(ledPin, LOW);
+    digitalWrite(ledRedPin, LOW);
+    digitalWrite(ledGreenPin, HIGH);
   }
   Serial.println(SensorReadingcm);
   delay(1000);

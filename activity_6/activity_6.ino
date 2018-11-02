@@ -1,5 +1,5 @@
 int SensorReadingcm;
-#define UltrasonicTrigerPin 5
+#define UltrasonicTriggerPin 5
 #define UltrasonicEchoPin 2
 
 
@@ -8,7 +8,7 @@ void setup() {
 
   Serial.begin(115200);
 
-  pinMode(UltrasonicTrigerPin, OUTPUT);
+  pinMode(UltrasonicTriggerPin, OUTPUT);
   pinMode(UltrasonicEchoPin, INPUT);
   
 
@@ -17,11 +17,11 @@ void setup() {
 void loop() {
   float duration;
 
-  digitalWrite(UltrasonicTrigerPin, LOW);
+  digitalWrite(UltrasonicTriggerPin, LOW);
   delayMicroseconds(2);
-  digitalWrite(UltrasonicTrigerPin, HIGH);
+  digitalWrite(UltrasonicTriggerPin, HIGH);
   delayMicroseconds(10);
-  digitalWrite(UltrasonicTrigerPin, LOW);
+  digitalWrite(UltrasonicTriggerPin, LOW);
 
   duration = pulseIn(UltrasonicEchoPin, HIGH);
 
