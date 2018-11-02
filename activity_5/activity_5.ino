@@ -9,7 +9,6 @@ void setup() {
 }
 
 void loop() {
-  float duration;
 
   digitalWrite(ledPin, HIGH);
   delay(3000);
