@@ -30,53 +30,53 @@ temp1 = 0
 arduino.write("I\n")
 
 def ReadArduino(arduino_out):
-    global serial_buffer, line
-    arduino_out = ""
+	global serial_buffer, line
+	arduino_out = ""
 	serial_data = arduino.read() 		# Read 1 character
 	while serial_data: 					# If there is a character proceed
 		serial_buffer += serial_data 	# Add character to buffer
 		if DEBUG: print "ReadArduino:Serial buffer:",(repr(serial_buffer))
 		# if there is a new line in it, then create Line string
 		if "\r\n" in serial_buffer:
-	    	if DEBUG: print "ReadArduino:New Line:",(repr(serial_buffer))
-		    line = serial_buffer
-	    	serial_buffer = "" 			# empty Serial buffer
+			if DEBUG: print "ReadArduino:New Line:",(repr(serial_buffer))
+			line = serial_buffer
+			serial_buffer = "" 			# empty Serial buffer
 		serial_data = arduino.read()
 		# if there is a Line string then finish reading the Line
 		if line:
 			# strip string for unwanted characters
 			line = line.replace("\r\n", "")
-            #line = line.strip(",")
-            arduino_out = line
-            if DEBUG: print "ReadArduino:arduino_out:", arduino_out
-            line = ""
-            if arduino_out == "": arduino_out = None
-            # add the last character to the new buffer
-            serial_buffer += serial_data
-            return arduino_out
+			#line = line.strip(",")
+			arduino_out = line
+			if DEBUG: print "ReadArduino:arduino_out:", arduino_out
+			line = ""
+			if arduino_out == "": arduino_out = None
+			# add the last character to the new buffer
+			serial_buffer += serial_data
+			return arduino_out
 
 #Report Udoo Neo Arduino Sensor data to Thingspeak Channel
 def writesensordata():
-    global temp1, sensorValue1
-    while True:
-        #read arduino data and make it a integer value
-        sensorValue1 = ReadArduino(sensorValue1)
-        if sensorValue1 is None:
-            sensorValue1 = '0'
-        temp1 = (sensorValue1)
+	global temp1, sensorValue1
+	while True:
+		#read arduino data and make it a integer value
+		sensorValue1 = ReadArduino(sensorValue1)
+		if sensorValue1 is None:
+			sensorValue1 = '0'
+		temp1 = (sensorValue1)
 		params = urllib.urlencode({'team_1': temp1,'key':key })
 		headers = {"Content-type": "application/x-www-form- urlencoded","Accept": "text/plain"}
-        conn = httplib.HTTPConnection("api.thingspeak.com:80")
-        try:
-            conn.request("POST", "/update", params, headers)
-            response = conn.getresponse()
-            print temp1
-            print response.status, response.reason
-            data = response.read()
-            conn.close()
-        except:
-            print "connection failed"
-        break
+		conn = httplib.HTTPConnection("api.thingspeak.com:80")
+		try:
+			conn.request("POST", "/update", params, headers)
+			response = conn.getresponse()
+			print temp1
+			print response.status, response.reason
+			data = response.read()
+			conn.close()
+		except:
+			print "connection failed"
+		break
 
 #sleep for desired amount of time
 if __name__ == "__main__":
