@@ -21,39 +21,40 @@ arduino.flushOutput()
 arduino.flushInput()
 serial_buffer = ""
 line = ""
+
 # sensor coefficient name
 sensorValue1 = '0'
 temp1 = 0
+
 #init for arduino so Arduino knows it can send data.
 arduino.write("I\n")
+
 def ReadArduino(arduino_out):
     global serial_buffer, line
     arduino_out = ""
-serial_data = arduino.read()
-while serial_data:
-# Read 1 character
-# If there is a character proceed
-# Add character to buffer
-serial_buffer += serial_data
-if DEBUG: print "ReadArduino:Serial buffer:",(repr(serial_buffer))
-# if there is a new line in it, then create Line string
-if "\r\n" in serial_buffer:
-    if DEBUG: print "ReadArduino:New Line:",(repr(serial_buffer))
-    line = serial_buffer
-    serial_buffer = "" # empty Serial buffer
-serial_data = arduino.read()
-# if there is a Line string then finish reading the Line
-if line:
-# strip string for unwanted characters
-line = line.replace("\r\n", "")
-                #line = line.strip(",")
-                arduino_out = line
-                if DEBUG: print "ReadArduino:arduino_out:", arduino_out
-                line = ""
-                if arduino_out == "": arduino_out = None
-                # add the last character to the new buffer
-                serial_buffer += serial_data
-                return arduino_out
+	serial_data = arduino.read() 		# Read 1 character
+	while serial_data: 					# If there is a character proceed
+		serial_buffer += serial_data 	# Add character to buffer
+		if DEBUG: print "ReadArduino:Serial buffer:",(repr(serial_buffer))
+		# if there is a new line in it, then create Line string
+		if "\r\n" in serial_buffer:
+	    	if DEBUG: print "ReadArduino:New Line:",(repr(serial_buffer))
+		    line = serial_buffer
+	    	serial_buffer = "" 			# empty Serial buffer
+		serial_data = arduino.read()
+		# if there is a Line string then finish reading the Line
+		if line:
+			# strip string for unwanted characters
+			line = line.replace("\r\n", "")
+            #line = line.strip(",")
+            arduino_out = line
+            if DEBUG: print "ReadArduino:arduino_out:", arduino_out
+            line = ""
+            if arduino_out == "": arduino_out = None
+            # add the last character to the new buffer
+            serial_buffer += serial_data
+            return arduino_out
+
 #Report Udoo Neo Arduino Sensor data to Thingspeak Channel
 def writesensordata():
     global temp1, sensorValue1
@@ -76,9 +77,10 @@ def writesensordata():
         except:
             print "connection failed"
         break
+
 #sleep for desired amount of time
 if __name__ == "__main__":
-        while True:
-                writesensordata()
-                time.sleep(sleep)
-        sleep(1800)
+	while True:
+		writesensordata()
+		time.sleep(sleep)
+	sleep(1800)
