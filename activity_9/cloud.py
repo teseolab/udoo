@@ -64,8 +64,8 @@ def writesensordata():
 		if sensorValue1 is None:
 			sensorValue1 = '0'
 		temp1 = (sensorValue1)
-		params = urllib.urlencode({'team_1': temp1,'key':key })
-		headers = {"Content-type": "application/x-www-form- urlencoded","Accept": "text/plain"}
+		params = urllib.urlencode({'field1': temp1,'key':key })
+		headers = {"Content-type": "application/x-www-form-urlencoded","Accept": "text/plain"}
 		conn = httplib.HTTPConnection("api.thingspeak.com:80")
 		try:
 			conn.request("POST", "/update", params, headers)
