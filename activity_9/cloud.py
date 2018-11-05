@@ -8,7 +8,7 @@ import httplib, urllib
 import time
 import serial
 # seconds to sleep between posts to the channel, API #limit min 15 sec
-sleep = 20
+sleep = 16
 #'Put your Thingspeak Channel Key here'
 # Thingspeak channel to update
 key = '7D30EE5AN79TNLK9'
