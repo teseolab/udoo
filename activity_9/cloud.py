@@ -11,6 +11,7 @@ import serial
 sleep = 16
 #'Put your Thingspeak Channel Key here'
 # Thingspeak channel to update
+# Public channel URL: https://thingspeak.com/channels/619239
 key = '7D30EE5AN79TNLK9'
 DEBUG = False
 # set to True to get more debug prints in the Python console
