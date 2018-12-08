@@ -4,7 +4,7 @@
 # and capture the Channel Key at #https://thingspeak.com/docs/tutorials/
 # Then paste channel ID in the code for the value of "key" below.
 # Then run as sudo python   FileName1.py
-import httplib, urllib
+import httplib, urllib, sys
 import time
 import serial
 # seconds to sleep between posts to the channel, API #limit min 15 sec
@@ -16,8 +16,18 @@ key_1 = '7D30EE5AN79TNLK9'
 key_2 = '0NZKLVGQT2VMTUHI'
 key_3 = '6EY6UZDVIEDZM1II'
 key_4 = 'X1KTLH3E77V2QNK7'
-DEBUG = False
-# set to True to get more debug prints in the Python console
+
+if len(sys.argv)<2 :
+	print "Insert your group number after the command, ex: 'python cloud.py g3'"
+	sys.exit()
+elif sys.argv[1] == 'g1': key = key_1
+elif sys.argv[1] == 'g2': key = key_2
+elif sys.argv[1] == 'g3': key = key_3
+elif sys.argv[1] == 'g4': key = key_4
+else:
+	print "Please insert a valid group number, ex: g1, g2, g3, g4"
+	sys.exit()
+
 DEBUG = False # set to True to get more debug prints in the Python console
 #Create serial device for reading serial
 arduino = serial.Serial('/dev/ttyMCC',115200,timeout=0)
