@@ -11,8 +11,11 @@ import serial
 sleep = 16
 #'Put your Thingspeak Channel Key here'
 # Thingspeak channel to update
-# Public channel URL: https://thingspeak.com/channels/619239
-key = '7D30EE5AN79TNLK9'
+# Public channel URL: https://s.ntnu.no/udoo_g[1,2,3,4]
+key_1 = '7D30EE5AN79TNLK9'
+key_2 = '0NZKLVGQT2VMTUHI'
+key_3 = '6EY6UZDVIEDZM1II'
+key_4 = 'X1KTLH3E77V2QNK7'
 DEBUG = False
 # set to True to get more debug prints in the Python console
 DEBUG = False # set to True to get more debug prints in the Python console
