@@ -41,7 +41,7 @@ void loop() {
     digitalWrite(ledGreenPin, HIGH);
   }
   Serial.println(SensorReadingcm);
-  delay(19000);
+  delay(22000);
 
 }
 
